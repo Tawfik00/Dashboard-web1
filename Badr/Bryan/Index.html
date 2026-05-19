@@ -119,6 +119,7 @@
                     <button id="notifBtn">Afficher notification</button>
                 </div>
 
+
                 <div class="notification">Notification affichée !</div>
 
                 <div class="form-box">
@@ -249,9 +250,17 @@
             $("#animateBtn").click(function () {
                 $("#square1")
                     .animate({ left: "200px" }, 500)
-                    .animate({ top: "100px" }, 500)
+                    .animate({ top: "100px" }, 500, function () {
+                        $(this).css("background", "blue");
+                    })
+
                     .animate({ left: "0px" }, 500)
-                    .animate({ top: "0px" }, 500);
+                    .animate({ top: "0px" }, 500, function () {
+                        $(this).css("background", "#ef4444");
+                    })
+
+
+                    ;
             });
 
             $("#stopBtn").click(function () {
@@ -269,7 +278,7 @@
                SQUARE3 → SLIDE
             ========================= */
             $("#square3").click(function () {
-                $(this).animate({ left: "80px" }, 500).animate({ left: "0px" }, 500);
+                $(this).animate({ left: "80px" }, 500);
             });
 
             /* =========================
