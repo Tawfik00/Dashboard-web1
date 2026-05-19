@@ -277,7 +277,7 @@ const REGEX = {
     // Règle : entre 3 et 16 caractères
     //         uniquement lettres (a-z, A-Z), chiffres, underscore _ ou tiret -
     // Indice : ^ = début, $ = fin, [groupe]{min,max}
-    username: /REMPLACE_MOI/,
+    username: /^[a-zA-Z0-9_-]{3,16}$/,
 
     // TODO 2 — Regex email
     // Règle : qqch @ qqch . qqch (au moins 2 lettres pour le domaine)
@@ -289,10 +289,9 @@ const REGEX = {
     //         au moins 1 minuscule, 1 majuscule, 1 chiffre, 1 caractère spécial
     // Indice : (?=...) = lookahead positif (vérifie sans consommer)
     //          (?=.*[A-Z]) = doit contenir au moins une majuscule quelque part
-    password: /REMPLACE_MOI/,
+    password: /^(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*()_\-+=])(?=.*\d).{8,}$/,
 
 };
-
 
 /* ============================================================
    TABS — basculer entre Inscription et Connexion
