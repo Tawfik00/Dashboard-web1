@@ -277,49 +277,23 @@ const REGEX = {
     // Règle : entre 3 et 16 caractères
     //         uniquement lettres (a-z, A-Z), chiffres, underscore _ ou tiret -
     // Indice : ^ = début, $ = fin, [groupe]{min,max}
-<<<<<<< HEAD
-<<<<<<< HEAD
-    username: /REMPLACE_MOI/,
-=======
     username: /^[a-zA-Z0-9_-]{3,16}$/,
->>>>>>> e8ab9d750855223dfff359a517b94d01d5570ad8
-=======
-    username: /^[a-zA-Z0-9_-]{3,16}$/,
->>>>>>> 34209070b4ed910ea23b2cc9eaa63a21b1ec8227
 
     // TODO 2 — Regex email
     // Règle : qqch @ qqch . qqch (au moins 2 lettres pour le domaine)
     // Indice : \. pour un vrai point, + = un ou plusieurs, {2,} = au moins 2
-<<<<<<< HEAD
     email: /^[a-zA-Z]+\@[a-zA-Z]+\.[a-zA-Z{2,}]+$/,
-=======
-    email: /REMPLACE_MOI/,
->>>>>>> e8ab9d750855223dfff359a517b94d01d5570ad8
 
     // TODO 3 — Regex password (la plus complexe !)
     // Règle : 8 caractères minimum
     //         au moins 1 minuscule, 1 majuscule, 1 chiffre, 1 caractère spécial
     // Indice : (?=...) = lookahead positif (vérifie sans consommer)
     //          (?=.*[A-Z]) = doit contenir au moins une majuscule quelque part
-<<<<<<< HEAD
-<<<<<<< HEAD
-    password: /REMPLACE_MOI/,
-
-};
-
-
-=======
     password: /^(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*()_\-+=])(?=.*\d).{8,}$/,
 
 };
 
->>>>>>> e8ab9d750855223dfff359a517b94d01d5570ad8
-=======
-    password: /^(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*()_\-+=])(?=.*\d).{8,}$/,
 
-};
-
->>>>>>> 34209070b4ed910ea23b2cc9eaa63a21b1ec8227
 /* ============================================================
    TABS — basculer entre Inscription et Connexion
 ============================================================ */
@@ -332,7 +306,7 @@ const REGEX = {
 
 $(".tab").on("click", function() {
 
-    // Ton code ici ↓
+    // Ton code ici ↓ a faire
 $(".tab").removeClass("active");
    $(this)
     .addClass("active");
@@ -343,8 +317,6 @@ const form= $(this).data("form");
 
     $("#" + form)
     .fadeIn(300);
-
-    
 });
 
 
@@ -360,9 +332,14 @@ const form= $(this).data("form");
 //   - Penser à .removeClass("ok error") au début pour reset l'état précédent
 
 $("#signup-username").on("keyup", function() {
-
-    // Ton code ici ↓
-
+    $("#f-username").removeClass(" ok error");
+    let valeur = $(this).val();
+    let result = REGEX.username.test(valeur);
+    if (result === true){
+        $("#f-username").addClass("ok");
+    } else {
+        $("#f-username").addClass("error");
+    }
 });
 
 
@@ -374,9 +351,14 @@ $("#signup-username").on("keyup", function() {
 //           Tester avec REGEX.email.test(valeur)
 
 $("#signup-email").on("keyup", function() {
-
-    // Ton code ici ↓
-
+    $("#f-email").removeClass(" ok error");
+    let valeur = $(this).val();
+    let result = REGEX.email.test(valeur);
+    if (result === true){
+        $("#f-email").addClass("ok");
+    } else {
+        $("#f-email").addClass("error");
+    }
 });
 
 
@@ -397,10 +379,35 @@ $("#signup-email").on("keyup", function() {
 //      Sinon retirer toutes les classes
 //
 //   c) Valider ou invalider le champ avec REGEX.password.test(valeur)
-
+// Regex pour les test de la jauge de force
+const REGEX2 = {
+minMaj: /^(?=.*[a-z])(?=.*[A-Z])$/,
+chiffre: /^(?=.*\d)$/,
+symbole: /^(?=.*[!@#$%^&*()_\-+=])$/,
+}
 $("#signup-password").on("keyup", function() {
-
-    // Ton code ici ↓
+    let score = 0
+    // test de la longueur
+    let longueur = len($("f-password"));
+    // test de la majuscule
+    let passMaj = $(this).val();
+    let testMaj = REGEX2.minMaj.test(passMaj);
+    // test du chiffre
+    let passChif = $(this).val();
+    let testChif = REGEX2.chiffre.test(passChif);
+    // test du symbole
+    let passSymb = $(this).val();
+    let testSymb = REGEX2.symbole.test(passSymb);
+    
+    if ( longueur >= 8 ){
+        score += 1;
+    } else if (testMaj === true){
+        score += 1;
+    } else if (testChif === true){
+        score += 1;
+    } else if (testSymb === true){
+        score += 1;
+    } 
 
 });
 
