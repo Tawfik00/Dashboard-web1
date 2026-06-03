@@ -384,6 +384,10 @@
 
       $(".tab").on("click", function () {
         // Ton code ici ↓
+        $(".tab").removeClass("active");
+        $(this).addClass("active");
+        $("#signupForm, #loginForm").hide();
+        $("#" + form).fadeIn(300);
       });
 
       /* ============================================================
