@@ -212,10 +212,10 @@ $("#signup-email").on("keyup", function() {
     const val = $(this).val();
     if (REGEX.email.test(val)) {
         $("#f-email").addClass("ok");
-        $("#f-email .hint").text("Nom d'utilisateur valide !");
+        $("#f-email .hint").text("Email valide !");
     } else {
         $("#f-email").addClass("error");
-        $("#f-email .hint").text("3-16 carac , ");
+        $("#f-email .hint").text("Format email incorrect");
     }
 });
 
