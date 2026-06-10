@@ -526,7 +526,42 @@ $(".strength span").each(function (i) {
 //      Après 800ms, appeler doLogin()
 
 $("#signupBtn").on("click", function () {
-  // Ton code ici ↓
+    const username = $(#username).val().trim()
+    const email = $(#email).val().trim()
+    const password = $(#password).val()
+
+    const errors = []
+
+    if (!REGEX.username.test(username)) errors.push("Nom d'utilisateur invalide.");
+    if (!REGEX.email.test(email)) errors.push("Adresse mail invalide.");
+    if (!REGEX.password.test(password)) errors.push("Mot de passe invalide.");
+
+    if (errors.length > 0){
+        $(this).addClass("shake");
+        setTimeout(() => {
+            $(this).removeClass("shake")
+        }, 600);
+
+        $("#signupFlash")
+        .removeClass("ok")
+        .addClass("err")
+        .html(errors.join("<br>"))
+        .hide()
+        .slideDown(300);
+    }else{
+        registeredUser = {username, email, password};
+
+        $("#signupFlash")
+        .removeClass("err")
+        .addClass("ok")
+        .text("Votre inscription est validée, Connexion en cours")
+        .hide()
+        .slideDown(300);
+    }
+
+    setTimeout(() => {
+        doLogin()
+    }, 800);
 });
 
 /* ============================================================
@@ -540,9 +575,45 @@ $("#signupBtn").on("click", function () {
 //   4. Si OK → appeler doLogin()
 //   5. Sinon → shake + flash "err"
 
-$("#loginBtn").on("click", function () {
-  // Ton code ici ↓
+$("#signupBtn").on("click", function () {
+    const username = $(#username).val().trim()
+    const email = $(#email).val().trim()
+    const password = $(#password).val()
+ 
+    const errors = []
+ 
+    if (!REGEX.username.test(username)) errors.push("Nom d'utilisateur invalide.");
+    if (!REGEX.email.test(email)) errors.push("Adresse mail invalide.");
+    if (!REGEX.password.test(password)) errors.push("Mot de passe invalide.");
+ 
+    if (errors.length > 0){
+        $(this).addClass("shake");
+        setTimeout(() => {
+            $(this).removeClass("shake")
+        }, 600);
+ 
+        $("#signupFlash")
+        .removeClass("ok")
+        .addClass("err")
+        .html(errors.join("<br>"))
+        .hide()
+        .slideDown(300);
+    }else{
+        registeredUser = {username, email, password};
+ 
+        $("#signupFlash")
+        .removeClass("err")
+        .addClass("ok")
+        .text("Votre inscription est validée, Connexion en cours")
+        .hide()
+        .slideDown(300);
+    }
+ 
+    setTimeout(() => {
+        doLogin()
+    }, 800);
 });
+ 
 
 /* ============================================================
    CONNEXION / DÉCONNEXION — logique fournie, ne pas modifier
