@@ -282,7 +282,7 @@ const REGEX = {
     // TODO 2 — Regex email
     // Règle : qqch @ qqch . qqch (au moins 2 lettres pour le domaine)
     // Indice : \. pour un vrai point, + = un ou plusieurs, {2,} = au moins 2
-    email: /^[a-zA-Z]+\@[a-zA-Z]+\.[a-zA-Z{2,}]+$/,
+    email: /^[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,6}$/,
 
     // TODO 3 — Regex password (la plus complexe !)
     // Règle : 8 caractères minimum
@@ -341,8 +341,10 @@ $("#signup-username").on("keyup", function() {
     let result = REGEX.username.test(valeur);
     if (result === true){
         $("#f-username").addClass("ok");
+        $(".hint").eq(0).text("Nom Valide");
     } else {
         $("#f-username").addClass("error");
+        $(".hint").eq(0).text("3 à 16 caractères : lettres, chiffres, _ ou -");
     }
 });
 
@@ -360,8 +362,10 @@ $("#signup-email").on("keyup", function() {
     let result = REGEX.email.test(valeur);
     if (result === true){
         $("#f-email").addClass("ok");
+        $(".hint").eq(1).text("Émail Valide");
     } else {
         $("#f-email").addClass("error");
+        $(".hint").eq(1).text("Format email standard requis");
     }
 });
 
@@ -391,11 +395,17 @@ console.log('salut');
 
 $("#signup-password").on("keyup", function() {
     let score = 0
+    // function test de la longueur du password
+    function passwordLengthValidate($hint){
     let password = $(this);
-    // test de la longueur
     let passLong = $(this).val();
     let testLong = passLong.length;
-    console.log(testLong)
+    if ( testLong <= 7 ){
+        hint.eq(0).text("8+ caractères,")
+    } 
+    }
+
+    passwordLengthValidate($(".hint"));
     // test de la majuscule
     let passMaj = $(this).val();
     let testMaj = REGEX.minMaj.test(passMaj);
@@ -410,10 +420,7 @@ $("#signup-password").on("keyup", function() {
     let result = REGEX.password.test(valeur);
 
     
-    if ( testLong >= 8 ){
-        score++;
-        console.log(" longueur ok");
-    } 
+    
     if (testMaj === true){
         score++;
         console.log(" majuscule ok");
