@@ -541,9 +541,13 @@ function updateProgress() {
 $(".toc-btn").on("click", function() {
 
     // Ton code ici ↓
+     let target = $(this).data('target');
+     $('.lesson').removeClass('open');
+    $('#' + target).addClass('open');
+     $('html, body').animate({ scrollTop: $("#" + target).offset().top - 80 }, 500);
    
 });
-
+updateProgress();
 
 /* ============================================================
    TODO 2 — Accordéon (clic sur .lesson-head)
@@ -558,9 +562,10 @@ $(".toc-btn").on("click", function() {
 $(".lesson-head").on("click", function() {
 
     // Ton code ici ↓
-   
+    let croix = $(this).closest(".lesson");
+    croix.toggleClass("open");
 });
-
+updateProgress();
 
 /* ============================================================
    TODO A — Démo 1a : colorier tous les .item
