@@ -305,7 +305,15 @@ h1 {
 ============================================================ */
 
 // Ton code ici ↓
+function updateClock(){
+        var dateActuelle = new Date();
+        var heureActuelle = dateActuelle.toLocaleTimeString({ hour:"2-digit", minute:"2-digit" });
+        $("#clock").text(heureActuelle);
+}
+updateClock();
 
+// 2. Mise à jour toutes les 1000 millisecondes (1 seconde)
+setInterval(updateClock, 1000);
 
 /* ============================================================
    TODO 2 — Compteurs animés avec $().animate()
@@ -332,7 +340,18 @@ h1 {
 $(".counter").each(function() {
 
     // Ton code ici ↓
-
+    let target = $(this).data("target");
+    let $el = $(this);
+        $({ n: 0 }).animate({ n: target }, {
+               duration: 1500,
+               easing: "swing",
+               step: function() {
+                   $el.text( Math.floor(this.n).toLocaleString("fr-FR") );
+               },
+               complete: function() {
+                   $el.text( target.toLocaleString("fr-FR") );
+               }
+           });
 });
 
 
@@ -351,9 +370,17 @@ $(".counter").each(function() {
 $("#barChart .bar").each(function(i) {
 
     // Ton code ici ↓
+    let h = $(this).data("h");
+    //h.delay(i * 100);
+
+    $(this).delay(i * 100)
+    .animate({ height: h + "%" }, 700);
 
 });
-
+/* let h = $(this).data("h");
+    //h.delay(i * 100);
+    $(this).animate({ height: h + "%" }, 700);
+    */
 
 /* ============================================================
    TODO 4 — Flux d'activité : apparition progressive
@@ -374,7 +401,7 @@ function animateFeed() {
     $(".feed-item").each(function(i) {
 
         // Ton code ici ↓
-
+        (".feed-item").delay(i * 200);
     });
 }
 
